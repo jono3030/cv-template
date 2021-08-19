@@ -16,3 +16,6 @@ Template to create a Curriculum Vitae using JSON to store data. There are plenty
 
 - Refactor with more efficient functions that allow multiple line printing to prevent duplicated code
 - Implement option to chose between correctly rendered pdf and html output
+- Comment code
+- Write documentation
+- Package
