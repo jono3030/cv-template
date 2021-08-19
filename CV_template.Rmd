@@ -1,0 +1,169 @@
+---
+header-includes:
+  - \usepackage{xcolor}
+  - \usepackage{graphicx}
+  - \usepackage{fancyhdr}
+  - \usepackage{lastpage}
+  - \usepackage{fontawesome5}
+  - \usepackage{hyperref}
+  - \hypersetup{colorlinks = true, allcolors = {blue}}
+  - \usepackage{multicol}
+  - \usepackage{setspace}
+output: pdf_document
+sansfont: Times New Roman
+fontsize: 11pt
+---
+
+```{r echo=F}
+source("CV_functions.R")
+```
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\color{gray}\thepage\ of \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+\fancypagestyle{plain}
+
+<!--Header-->
+\begin{center}
+
+  % Name
+  {\huge \textbf{`r sprintf("%s %s", name("first"), name("last"))`}}
+
+  % When was CV last updated
+  {\small \textcolor{gray}{\textit{Last updated:} `r format(Sys.Date(), '%B %d, %Y')`}}
+  
+  \vspace{-.5em}
+  \hrulefill
+  
+  % Profession
+  \textbf{`r sprintf("%s", profession("primary"))`}
+  
+  `r convertEmail("personal", "address", "icon")`
+  `r convertPhoneCanada("cell", "number", "icon")`
+  `r convertAddressIcon()`
+  `r convertIconLinks("github", "name", "link", "icon")`
+  `r convertIconLinks("linkedin", "name", "link", "icon", endSpace=FALSE)`
+  
+  \vspace{-.5em}
+  \hrulefill
+
+\end{center}
+
+## SUMMARY
+
+`r vspace_title()`
+
+\hrulefill
+
+\onehalfspacing
+
+<!--Summary-->
+First female war photographer known professionally as Gerda Taro. Died while covering combat and creator of one of the most moving studies ever made of people in war.
+
+\singlespacing
+
+## KEY SKILLS
+
+`r vspace_title()`
+
+\hrulefill
+
+\begin{multicols}{2}
+
+\begin{itemize}
+
+\item `r skills("key", "photography", key=TRUE)`
+\item `r skills("key", "editing", key=TRUE)`
+\item `r skills("key", "beingDifferent", key=TRUE)`
+\item `r skills("key", "determined", key=TRUE)`
+
+\end{itemize}
+
+\end{multicols}
+
+## TECHNICAL SKILLS
+
+`r vspace_title()`
+
+\hrulefill
+
+\onehalfspacing
+
+`r skills("technical", "camera")`
+
+\singlespacing
+
+## EDUCATION
+
+`r vspace_title()`
+
+\hrulefill
+
+<!--Realshule-->
+`r degree("realschule")`
+
+`r vspace_under()`
+
+`r institution("realschule")`
+
+## PROFESSIONAL EXPERIENCE
+
+`r vspace_title()`
+
+\hrulefill
+
+<!--Server Architect-->
+`r workExperience("warphotographer")`
+
+`r vspace_under()`
+
+`r employer("warphotographer")`
+
+`r vspace_under()`
+
+`r tasksSelect("warphotographer", "overview")`
+
+## AWARDS
+
+`r vspace_title()`
+
+\hrulefill
+
+<!--Sara Al Bader-->
+`r vspace_over()`
+
+`r awards("taro")`
+
+`r vspace_under()`
+
+`r awardsDescription("taro")`
+
+## PUBLICATIONS
+
+`r vspace_title()`
+
+\hrulefill
+
+\onehalfspacing
+
+1. `r publications("capa1938taro", abbr=T)`
+
+\singlespacing
+
+## LANGUAGES
+
+`r vspace_title()`
+
+\hrulefill
+
+\onehalfspacing
+
+Spoken and written:
+
+`r languages("german")`
+`r languages("english")`
+`r languages("french")`
+
+\singlespacing

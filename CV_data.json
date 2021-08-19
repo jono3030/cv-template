@@ -1,0 +1,118 @@
+[
+	{
+	"taro": {
+		"profession": {
+			"primary": "War Photographer"
+		    },
+		"names": {
+			"firstName": "Gerta",
+			"middleName": "",
+			"lastName": "Pohoryelle"
+			},
+		"address": {
+	  	    "street": "",
+	  	    "addition": "",
+	  	    "city": "Paris",
+	  	    "postalCode": "",
+	  	    "state": "",
+	  	    "country": "",
+	  	    "icon": "\\faStreetView"
+			},
+		"phone": {
+			"cell": {
+				"number": "0123456789",
+				"icon": "\\faPhoneSquare"
+				}
+			},
+		"email": {
+			"uni": {
+				"address": "gerdataro@life.com",
+				"icon": "\\faEnvelope"
+				},
+			"personal": {
+				"address": "gerdataro@life.com",
+				"icon": "\\faEnvelope"
+				}
+			},
+		"links": {
+			"github": {
+				"link": "https://en.wikipedia.org/wiki/Gerda_Taro",
+				"icon": "\\faGithub",
+				"name": "gerdataro"
+				},
+			"linkedin": {
+				"link": "https://en.wikipedia.org/wiki/Gerda_Taro",
+				"icon": "\\faLinkedin",
+				"name": "gerdataro"
+				}
+			},
+		"degrees": {
+			"realschule": {
+				"type": "Realschulabschluss",
+				"field": "Realschule Education",
+				"dates": "1917 -- 1925",
+				"institution": "Koenigin-Charlotte Realschule",
+				"city": "Stuttgart",
+				"country": "Germany"
+				}
+			},
+		"workExp": {
+			"warphotographer": {
+				"position": "War Photographer",
+				"dates": "1934 -- 1937",
+				"employer": "Photo Taro",
+				"city": "Multiple cities",
+				"country": "Spain",
+                "taskList": {
+				    "overview": "Covering the Spanish Civil War"
+					}
+				}
+			},
+		"skills": {
+			"key": {
+				"photography": "Photography",
+				"beingDifferent": "Anderssein",
+				"editing": "Editing",
+				"determined": "Determined"
+			},
+			"technical": {
+				"camera": "**Cameras:** Leica II, Leica III"
+			}
+		},
+		"awards": {
+			"taro": {
+				"award": "Gerda Taro Award",
+				"year": "1937",
+				"description": "Presented to photography students who shows exceptional promise",
+				"value": "USD$1000"
+				}
+			},
+		"languages": {
+			"german": {
+				"language": "- **German:**",
+				"level": "Native speaker"
+				},
+			"english": {
+				"language": "- **English:**",
+				"level": "Professional working proficiency"
+				},
+			"french": {
+				"language": "- **French:**",
+				"level": "Professional working proficiency"
+				}
+			},
+		"publications": {
+			"capa1938taro": {
+                "title": "Death in the Making",
+                "authors": [
+		     		{"firstName": "Gerda", "lastName": "Taro"},
+		     		{"firstName": "Robert", "lastName": "Capa"}
+				],
+                "year": "1938",
+                "journal": "New York: Covici Friede"
+          			}
+				}
+	     }
+	}
+
+]
