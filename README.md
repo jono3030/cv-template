@@ -1,4 +1,4 @@
-# Rmarkdown template for CV
+# Rmarkdown CV template
 
 Template to create a Curriculum Vitae using JSON to store data. There are plenty of excellent CV templates for Rmarkdown available online but I wanted to make one from scratch to better understand the process and to be able to customize it easily.
 
