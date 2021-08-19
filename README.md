@@ -9,8 +9,8 @@ Template to create a Curriculum Vitae using JSON to store data. There are plenty
 
 ## Preview
 
-![](./preview/CV_template_p1.jpg)
-![](./preview/CV_template_p2.jpg)
+![](https://github.com/jono3030/cv-template/blob/main/preview/CV_template-p1.jpg)
+![](https://github.com/jono3030/cv-template/blob/main/preview/CV_template-p2.jpg)
 
 ## To do
 
