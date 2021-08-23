@@ -6,7 +6,7 @@
 		    },
 		"names": {
 			"firstName": "Gerta",
-			"middleName": "",
+			"middleName": "Taro",
 			"lastName": "Pohoryelle"
 			},
 		"address": {
@@ -24,6 +24,9 @@
 				"icon": "\\faPhoneSquare"
 				}
 			},
+		"summary": {
+			"primary": "First female war photographer known professionally as Gerda Taro. Died while covering combat and creator of one of the most moving studies ever made of people in war."
+		},
 		"email": {
 			"uni": {
 				"address": "gerdataro@life.com",
@@ -64,7 +67,8 @@
 				"city": "Multiple cities",
 				"country": "Spain",
                 "taskList": {
-				    "overview": "Covering the Spanish Civil War"
+				    "overview": "Covering the Spanish Civil War",
+				    "primary": "Being awesome"
 					}
 				}
 			},
@@ -105,7 +109,7 @@
 			"capa1938taro": {
                 "title": "Death in the Making",
                 "authors": [
-		     		{"firstName": "Gerda", "lastName": "Taro"},
+		     		{"firstName": "Gerta", "lastName": "Pohoryelle"},
 		     		{"firstName": "Robert", "lastName": "Capa"}
 				],
                 "year": "1938",

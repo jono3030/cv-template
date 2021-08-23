@@ -29,46 +29,36 @@ source("CV_functions.R")
 \begin{center}
 
   % Name
-  {\huge \textbf{`r sprintf("%s %s", name("first"), name("last"))`}}
+  `r name("firstLast")`
 
   % When was CV last updated
-  {\small \textcolor{gray}{\textit{Last updated:} `r format(Sys.Date(), '%B %d, %Y')`}}
+  `r lastUpdated("current")`
   
-  \vspace{-.5em}
-  \hrulefill
+  % hrulefill with space
+  `r vspace_header()`
   
   % Profession
-  \textbf{`r sprintf("%s", profession("primary"))`}
+  `r profession()`
   
+  % Contact info
   `r convertEmail("personal", "address", "icon")`
   `r convertPhoneCanada("cell", "number", "icon")`
   `r convertAddressIcon()`
   `r convertIconLinks("github", "name", "link", "icon")`
   `r convertIconLinks("linkedin", "name", "link", "icon", endSpace=FALSE)`
   
-  \vspace{-.5em}
-  \hrulefill
+  % hrulefill with space
+  `r vspace_header()`
 
 \end{center}
 
-## SUMMARY
-
-`r vspace_title()`
-
-\hrulefill
-
-\onehalfspacing
+`r sectionsFunc("SUMMARY")`
 
 <!--Summary-->
-First female war photographer known professionally as Gerda Taro. Died while covering combat and creator of one of the most moving studies ever made of people in war.
+`r convertSummary("primary")`
 
-\singlespacing
-
-## KEY SKILLS
-
-`r vspace_title()`
-
-\hrulefill
+<!--Key skills-->
+`r sectionsFunc("KEY SKILLS")`
 
 \begin{multicols}{2}
 
@@ -83,11 +73,7 @@ First female war photographer known professionally as Gerda Taro. Died while cov
 
 \end{multicols}
 
-## TECHNICAL SKILLS
-
-`r vspace_title()`
-
-\hrulefill
+`r sectionsFunc("TECHNICAL SKILLS")`
 
 \onehalfspacing
 
@@ -95,26 +81,13 @@ First female war photographer known professionally as Gerda Taro. Died while cov
 
 \singlespacing
 
-## EDUCATION
+`r sectionsFunc("EDUCATION")`
 
-`r vspace_title()`
+`r degreeFunc("realschule")`
 
-\hrulefill
+`r sectionsFunc("PROFESSIONAL EXPERIENCE")`
 
-<!--Realshule-->
-`r degree("realschule")`
-
-`r vspace_under()`
-
-`r institution("realschule")`
-
-## PROFESSIONAL EXPERIENCE
-
-`r vspace_title()`
-
-\hrulefill
-
-<!--Server Architect-->
+<!--War photographer-->
 `r workExperience("warphotographer")`
 
 `r vspace_under()`
@@ -125,13 +98,9 @@ First female war photographer known professionally as Gerda Taro. Died while cov
 
 `r tasksSelect("warphotographer", "overview")`
 
-## AWARDS
+`r sectionsFunc("AWARDS")`
 
-`r vspace_title()`
-
-\hrulefill
-
-<!--Sara Al Bader-->
+<!--Taro award-->
 `r vspace_over()`
 
 `r awards("taro")`
@@ -140,11 +109,7 @@ First female war photographer known professionally as Gerda Taro. Died while cov
 
 `r awardsDescription("taro")`
 
-## PUBLICATIONS
-
-`r vspace_title()`
-
-\hrulefill
+`r sectionsFunc("PUBLICATIONS")`
 
 \onehalfspacing
 
@@ -152,11 +117,7 @@ First female war photographer known professionally as Gerda Taro. Died while cov
 
 \singlespacing
 
-## LANGUAGES
-
-`r vspace_title()`
-
-\hrulefill
+`r sectionsFunc("LANGUAGES")`
 
 \onehalfspacing
 
