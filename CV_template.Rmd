@@ -26,38 +26,15 @@ source("CV_functions.R")
 \fancypagestyle{plain}
 
 <!--Header-->
-\begin{center}
+`r headerFunc()`
 
-  % Name
-  `r name("firstLast")`
-
-  % When was CV last updated
-  `r lastUpdated("current")`
-  
-  % hrulefill with space
-  `r vspace_header()`
-  
-  % Profession
-  `r profession()`
-  
-  % Contact info
-  `r convertEmail("personal", "address", "icon")`
-  `r convertPhoneCanada("cell", "number", "icon")`
-  `r convertAddressIcon()`
-  `r convertIconLinks("github", "name", "link", "icon")`
-  `r convertIconLinks("linkedin", "name", "link", "icon", endSpace=FALSE)`
-  
-  % hrulefill with space
-  `r vspace_header()`
-
-\end{center}
-
+<!--Professional summary section-->
 `r sectionsFunc("SUMMARY")`
 
 <!--Summary-->
-`r convertSummary("primary")`
+`r convertSummary()`
 
-<!--Key skills-->
+<!--Key skills section-->
 `r sectionsFunc("KEY SKILLS")`
 
 \begin{multicols}{2}
@@ -85,37 +62,22 @@ source("CV_functions.R")
 
 `r degreeFunc("realschule")`
 
+<!--Professional experience section-->
 `r sectionsFunc("PROFESSIONAL EXPERIENCE")`
 
 <!--War photographer-->
-`r workExperience("warphotographer")`
+`r workExpFunc("warphotographer")`
 
-`r vspace_under()`
-
-`r employer("warphotographer")`
-
-`r vspace_under()`
-
-`r tasksSelect("warphotographer", "overview")`
-
+<!--Awards section-->
 `r sectionsFunc("AWARDS")`
 
 <!--Taro award-->
-`r vspace_over()`
+`r awardsFunc("taro")`
 
-`r awards("taro")`
-
-`r vspace_under()`
-
-`r awardsDescription("taro")`
-
+<!--Publications section-->
 `r sectionsFunc("PUBLICATIONS")`
 
-\onehalfspacing
-
-1. `r publications("capa1938taro", abbr=T)`
-
-\singlespacing
+`r publicationsFunc()`
 
 `r sectionsFunc("LANGUAGES")`
 

@@ -2,12 +2,13 @@ suppressMessages(library(jsonlite))
 suppressMessages(library(tidyverse))
 suppressMessages(library(purrr))
 
-setwd(getwd())
+#setwd(dirname(file.choose())) # Uncomment to set the pwd when working on the functions
 json.table <- 'CV_data.json'
 df <- data.frame(fromJSON(txt=json.table))
 
 chosenDfName <- "taro"
 titleSpacingValue <- -1.4
+hspaceHeader <- 1
 
 vspace_title <- function(spaceVar) {
   sprintf("\\vspace{%sem}", spaceVar)
@@ -18,7 +19,7 @@ sectionsFunc <- function(titleVar, spaceVar=titleSpacingValue) {
     paste("##", titleVar, sep=" "),
     vspace_title(spaceVar),
     "\\hrulefill"
-  ), collapse = "\n")
+  ), collapse = "\n\n")
 }
 
 getAllNames <- function(dfName=chosenDfName) {
@@ -29,7 +30,7 @@ getAllNames <- function(dfName=chosenDfName) {
   return(capture.output(cat(tmpList)))
 }
 
-name <- function(whichName, dfName=chosenDfName) {
+name <- function(whichName="all", dfName=chosenDfName) {
   if (whichName == "all") {
     return(sprintf("{\\huge \\textbf{%s}}", getAllNames()))
   } else if (whichName == "first") {
@@ -47,7 +48,7 @@ name <- function(whichName, dfName=chosenDfName) {
   return(name)
 }
 
-lastUpdated <- function(dateVar) {
+lastUpdated <- function(dateVar="current") {
   if (dateVar == "current") {
     returnVar <- format(Sys.Date(), '%B %d, %Y')
   } else {
@@ -56,8 +57,6 @@ lastUpdated <- function(dateVar) {
   return(sprintf("{\\small \\textcolor{gray}{\\textit{Last updated:} %s}}", returnVar))
   #{\small \textcolor{gray}{\textit{Last updated:} `r format(Sys.Date(), '%B %d, %Y')`}}
 }
-
-df$taro$profession[[1]]
 
 getAllProfessions <- function(dfName=chosenDfName) {
   tmpList <- c()
@@ -94,19 +93,27 @@ address <- function(dfName=chosenDfName) {
           country)
 }
 
-convertAddressIcon <- function(dfName=chosenDfName) {
+convertAddressIcon <- function(hspaceVar=hspaceHeader, endSpace=F, dfName=chosenDfName) {
   city <- df[[dfName]]$address$city
   icon <- df[[dfName]]$address$icon
-  sprintf("%s \\hspace{-.1ex} %s \\hspace{0ex}", icon, city)
+  if (endSpace == TRUE) {
+    sprintf("%s \\hspace{-.%sex} %s \\hspace{0ex}", icon, hspaceVar, city)
+  } else {
+    sprintf("%s \\hspace{-.%sex} %s", icon, hspaceVar, city)
+  }
 }
 
-convertEmail <- function(type, emailAddress, whichIcon, dfName=chosenDfName) {
+convertEmail <- function(type=1, emailAddress=1, whichIcon=2, endSpace=F, dfName=chosenDfName) {
   email <- df[[dfName]]$email[[type]][[emailAddress]]
   icon <- df[[dfName]]$email[[type]][[whichIcon]]
-  sprintf("%s \\hspace{-.1ex} \\href{mailto:%s}{%s} \\hspace{0ex}", icon, email, email) 
+  if (endSpace == TRUE) {
+    sprintf("%s \\hspace{-.1ex} \\href{mailto:%s}{%s} \\hspace{0ex}", icon, email, email) 
+  } else {
+    sprintf("%s \\hspace{-.1ex} \\href{mailto:%s}{%s}", icon, email, email) 
+  }
 }
 
-convertIconLinks <- function(name, whichLinkName, whichLink, whichIcon, endSpace=TRUE, dfName=chosenDfName) {
+convertIconLinks <- function(name, whichLinkName=1, whichLink=2, whichIcon=3, endSpace=F, dfName=chosenDfName) {
   link <- df[[dfName]]$links[[name]][[whichLink]]
   icon <- df[[dfName]]$links[[name]][[whichIcon]]
   linkName <- df[[dfName]]$links[[name]][[whichLinkName]]
@@ -117,7 +124,7 @@ convertIconLinks <- function(name, whichLinkName, whichLink, whichIcon, endSpace
   }
 }
 
-convertPhoneCanada <- function(type, phoneNumber, whichIcon, endSpace=TRUE, dfName=chosenDfName) {
+convertPhoneCanada <- function(type=1, phoneNumber=1, whichIcon=2, endSpace=F, dfName=chosenDfName) {
   number <- df[[dfName]]$phone[[type]][[phoneNumber]]
   icon <- df[[dfName]]$phone[[type]][[whichIcon]]
   nr <- unlist(strsplit(as.character(number),""))
@@ -131,20 +138,34 @@ convertPhoneCanada <- function(type, phoneNumber, whichIcon, endSpace=TRUE, dfNa
   }
 }
 
+contactInfo <- function() {
+  paste(c(convertEmail(),
+        convertPhoneCanada(),
+        convertAddressIcon(),
+        convertIconLinks("github"),
+        convertIconLinks("linkedin")),
+        collapse = " \\hspace{0ex} ")
+}
+
+headerFunc <- function() {
+  paste(c(
+    "\\begin{center}",
+    name(),
+    lastUpdated(),
+    vspace_header(),
+    profession(),
+    contactInfo(),
+    vspace_header(),
+    "\\end{center}"
+  ), collapse = "\n\n")
+}
+
 convertSummary <- function(whichSummary=1, dfName=chosenDfName) {
   paste(c(
     "\\onehalfspacing",
     df[[dfName]]$summary[[whichSummary]],
     "\\singlespacing"
   ), collapse="\n")
-}
-
-sectionsFunc <- function(titleVar, spaceVar=titleSpacingValue) {
-  paste(c(
-    paste("##", titleVar, sep=" "),
-    vspace_title(spaceVar),
-    "\\hrulefill"
-  ), collapse = "\n")
 }
 
 skills <- function(whichType, whichSkill, key=FALSE, dfName=chosenDfName) {
@@ -177,14 +198,6 @@ degreeFunc <- function(degreeVar) {
     vspace_under(),
     institution(degreeVar)
   ), collapse="\n")
-}
-
-sectionsFunc <- function(titleVar, spaceVar=titleSpacingValue) {
-  paste(c(
-    paste("##", titleVar, sep=" "),
-    vspace_title(spaceVar),
-    "\\hrulefill"
-  ), collapse = "\n")
 }
 
 workExperience <- function(work, dfName=chosenDfName) {
@@ -222,6 +235,29 @@ tasksList <- function(work, dfName=chosenDfName) {
   }
 }
 
+tasksListFunc <- function(whichWork, dfName=chosenDfName){
+  tasksLength <- length(df[[dfName]]$workExp[[whichWork]]$taskList)
+  itemList <- c()    
+  for (i in 1:tasksLength) {
+        itemList[[i]] <- paste0("- ", df[[dfName]]$workExp[[whichWork]]$taskList[[i]])
+  }
+  return(itemList)
+}
+
+workExpFunc <- function(whichWorkVar) {
+  paste(c(
+    workExperience(whichWorkVar),
+    "\n",
+    vspace_under(),
+    "\n",
+    employer(whichWorkVar),
+    "\n",
+    vspace_under(),
+    "\n",
+    tasksListFunc(whichWorkVar)
+  ), collapse="\n")
+}
+
 awards <- function(name, dfName=chosenDfName) {
   award <- df[[dfName]]$awards[[name]][1]
   year <- df[[dfName]]$awards[[name]][2]
@@ -244,6 +280,15 @@ awardsValue <- function(name, dfName=chosenDfName) {
   value <- df[[dfName]]$awards[[name]][4]
   returnObject <- sprintf("*Total value: %s*", value)
   return(returnObject)
+}
+
+awardsFunc <- function(whichAward) {
+  paste(c(
+    vspace_over(),
+    awards("taro"),
+    vspace_under(),
+    awardsDescription("taro")
+  ), collapse="\n\n")
 }
 
 languages <- function(whichLanguage, dfName=chosenDfName) {
@@ -283,7 +328,47 @@ authorNames <- function(reference, dfName=chosenDfName) {
   return(authorNames)
 }
 
-publications <- function(whichPublication, full=FALSE, abbr=FALSE, reviewChoice=FALSE, dfName=chosenDfName) {
+#publications <- function(whichPublication, full=FALSE, abbr=FALSE, reviewChoice=FALSE, dfName=chosenDfName) {
+#  highlightedAuthorName <- paste(paste0(name("last"),","), paste0(substr(name("first"),1,1),"."), sep = " ")
+#  tmpdf <- df[[dfName]]$publications[[whichPublication]]
+#  title <- tmpdf$title
+#  author <- gsub(highlightedAuthorName, paste0("**", highlightedAuthorName, "**"), authorNames(whichPublication))
+#  year <- tmpdf$year
+#  journal <- tmpdf$journal
+#  volume <- tmpdf$volume
+#  number <- tmpdf$number
+#  pages <- tmpdf$pages
+#  doi <- tmpdf$doi
+#  review <- "Currently under review"
+#  if (full == TRUE) {
+#    returnObject <- sprintf("%s (%s). %s, *%s*, *%s*(%s), %s.",
+#                            author,
+#                            year,
+#                            title,
+#                            journal,
+#                            volume,
+#                            number,
+#                            pages
+#                            )
+#  } else if (abbr == TRUE) {
+#    returnObject <- sprintf("%s (%s). %s, *%s*.",
+#                            author,
+#                            year,
+#                            title,
+#                            journal
+#                            )
+#  } else if (reviewChoice == TRUE) {
+#    returnObject <- sprintf("%s (%s). %s. *%s*.",
+#                            author,
+#                            year,
+#                            title,
+#                            review
+#                            )
+#  }
+#  return(returnObject)
+#}
+
+publications <- function(whichPublication, dfName=chosenDfName) {
   highlightedAuthorName <- paste(paste0(name("last"),","), paste0(substr(name("first"),1,1),"."), sep = " ")
   tmpdf <- df[[dfName]]$publications[[whichPublication]]
   title <- tmpdf$title
@@ -295,7 +380,8 @@ publications <- function(whichPublication, full=FALSE, abbr=FALSE, reviewChoice=
   pages <- tmpdf$pages
   doi <- tmpdf$doi
   review <- "Currently under review"
-  if (full == TRUE) {
+  formattingTypeVar <- tmpdf$formattingType
+  if (formattingTypeVar == "full") {
     returnObject <- sprintf("%s (%s). %s, *%s*, *%s*(%s), %s.",
                             author,
                             year,
@@ -305,14 +391,14 @@ publications <- function(whichPublication, full=FALSE, abbr=FALSE, reviewChoice=
                             number,
                             pages
                             )
-  } else if (abbr == TRUE) {
+  } else if (formattingTypeVar == "abbr") {
     returnObject <- sprintf("%s (%s). %s, *%s*.",
                             author,
                             year,
                             title,
                             journal
                             )
-  } else if (reviewChoice == TRUE) {
+  } else if (formattingTypeVar == "reviewChoice") {
     returnObject <- sprintf("%s (%s). %s. *%s*.",
                             author,
                             year,
@@ -321,6 +407,23 @@ publications <- function(whichPublication, full=FALSE, abbr=FALSE, reviewChoice=
                             )
   }
   return(returnObject)
+}
+
+publicationsFunc <- function(dfName=chosenDfName) {
+  publicationsListLength <- length(df[[dfName]]$publications)
+  
+  itemList <- c()    
+  for (i in 1:publicationsListLength) {
+        itemList[[i]] <- paste0(i, ". ", publications(i))
+  }
+  
+  paste(c(
+    "\\onehalfspacing",
+    "\n",
+    itemList,
+    "\n",
+    "\\singlespacing"
+  ), collapse="\n")
 }
 
 vspace_under <- function() {
